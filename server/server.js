@@ -9,13 +9,16 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect("mongodb://localhost:27017/books_db");
+const mongoDbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/books_db"; 
+
+mongoose.connect(mongoDbUrl);
 
 app.use(express.static(__dirname+'/../public'));
 app.use(bodyParser.json());
 
 
 const port = process.env.PORT || 3000;
+
 
 
 app.post('/api/add/store', (req, res)=>{ 
